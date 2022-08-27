@@ -158,8 +158,20 @@ export default
                 {
                     const { data: { pagination, rows } } = await this.$options.serviceWorker.search( this.filter, this.pagination.current, this.pagination.limit );
 
-                    this.rows       = rows;
-                    this.pagination = Object.assign( {}, this.pagination, pagination );
+                    this.rows = rows;
+
+                    //this.pagination = Object.assign( {}, this.pagination, pagination );
+
+                    //hotfix, amocrm didnt return total count, only next page
+
+                    const new_pagination =
+                    {
+                        current: pagination.page,
+                        limit  : pagination.limit,
+                        count  : pagination.page * pagination.limit + !!pagination.next   // +1 to next page
+                    }
+
+                    this.pagination = new_pagination;
                 }
             );
         }
