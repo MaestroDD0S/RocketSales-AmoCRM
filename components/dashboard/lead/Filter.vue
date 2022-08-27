@@ -2,6 +2,7 @@
     <v-form class="d-flex" v-model="validated" :disabled="loading" @submit.prevent="searchDebounce">
         <v-col class="d-flex px-0" cols="12" sm="4" xl="3">
             <v-text-field
+                v-model="params.query"
                 solo clearable
                 label="Поиск"
                 :rules="rules"
